@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surat Permintaan Maaf</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive;
+      background: url('japan-scenary.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 500px;
+      margin: 5vh auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ffb6c1;
+      cursor: pointer;
+    }
+    #noBtn {
+      position: relative;
+    }
+    #noBtn:hover {
+      position: absolute;
+      top: calc(50% - 30px);
+      left: calc(50% - 50px);
+      transform: translateX(calc(100px - 200px * Math.random()));
+    }
+    #typingText {
+      display: inline-block;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+    video {
+      width: 100%;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="page1">
+    <h2>Masukkan Nama Kamu 😊</h2>
+    <input type="text" id="namaInput">
+    <br><br>
+    <button onclick="cekNama()">Lanjut</button>
+  </div>
+
+  <div class="container" id="page2" style="display:none;">
+    <h2 id="judulMaaf"></h2>
+    <p id="pesanMaaf">Maaf ya atas semua kesalahanku harus dimaafin loh gamau tau🥺🙏</p>
+    <br>
+    <button onclick="lanjutKeHalaman3()">Maafin 😭</button>
+    <button id="noBtn">Nggak! 😤</button>
+  </div>
+
+  <div class="container" id="page3" style="display:none;">
+    <h2>Ucapan terimakasih ku buat kakak🥰</h2>
+    <p id="typingText"></p>
+    <br>
+    <button onclick="lanjutKeHalaman4()">Peluk Duluu siniii!🤗</button>
+  </div>
+
+  <div class="container" id="page4" style="display:none;">
+    <h2>🤗 Virtual Hug aja dulu🤗</h2>
+    <p>Peluk virtual dari aku buat buat kk, karena ga bisa peluk real juga sih hehe ❤️</p>
+    <video autoplay loop muted>
+      <source src="video-hug.webm" type="video/mp4">
+    </video>
+  </div>
+
+  <audio autoplay loop>
+    <source src="sad-song.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    let namaOrang = "";
+    function cekNama() {
+  namaOrang = document.getElementById("namaInput").value.trim().toLowerCase();
+  if(namaOrang.includes("bela")){
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
+    document.getElementById("judulMaaf").innerText = `makasih udah masukin sandi aslinya kak Bela... Maaf ya 🥺❤️`;
+  } else {
+    const pesanLucu = [
+      "Kamu bohong 😡 Nama kamu bukan itu xixixi",
+      "Yang bener dong, jujur aja nama asli kamu siapa 😤",
+      "Hmm... masa sih itu nama kamu? Coba cek lagi 😏",
+      "Itu bukan nama kamu deh, jangan ngibul yaaa 🙄",
+      "Eits! Nama samaran ya itu? Hayo ngaku 🕵️‍♀️",
+      "Nama bohong ga bisa buat lanjut hehe 😅"
+    ];
+    const randomIndex = Math.floor(Math.random() * pesanLucu.length);
+    alert(pesanLucu[randomIndex]);
+  }
+}
+
+    function lanjutKeHalaman3() {
+      document.getElementById("page2").style.display = "none";
+      document.getElementById("page3").style.display = "block";
+      ketikKalimat("Terima kasih ya kak, udah mau maafin aku, aku bener bener minta maaf perihal cerita ku sampai bikin kk cemburu. lain kali aku akan lebih berhati-hati buat cerita agar lebih bisa jaga perasaan kakak yaa. 💖");
+    }
+
+    function lanjutKeHalaman4() {
+      document.getElementById("page3").style.display = "none";
+      document.getElementById("page4").style.display = "block";
+    }
+
+    function ketikKalimat(text) {
+      let i = 0;
+      let target = document.getElementById("typingText");
+      target.innerHTML = "";
+      let interval = setInterval(() => {
+        target.innerHTML += text[i];
+        i++;
+        if(i >= text.length) clearInterval(interval);
+      }, 50);
+    }
+  </script>
+</body>
+</html>
